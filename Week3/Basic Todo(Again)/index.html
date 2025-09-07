@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Enter a task">
+        <button onclick="addTask()">Add</button>
+        <ul id="todos"></ul>
+    </div>
+
+    <script>
+        let todos = [];
+
+        function addTask() {
+            const input = document.querySelector("input");
+            const value = input.value.trim();
+            if (value) {
+                todos.push({ title: value });
+                input.value = ""; // Clear input
+                render();
+            }
+        }
+
+        function render() {
+            const todosList = document.querySelector("#todos");
+            todosList.innerHTML = ""; // ✅ Correct way to clear existing items
+
+            for (let i = 0; i < todos.length; i++) {
+                const todo = todos[i];
+                
+                const li = document.createElement("li");
+                li.textContent = todo.title;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => {
+                    todos.splice(i, 1);
+                    render();
+                };
+
+                const div = document.createElement("div");
+                div.appendChild(li);
+                div.appendChild(deleteBtn);
+
+                todosList.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>

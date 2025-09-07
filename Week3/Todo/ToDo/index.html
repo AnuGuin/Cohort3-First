@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Add task"></input>
+    <button onclick="addTask()">Add</button>
+</body>
+<script>
+    let ctr = 1;
+    function deleteTodo(index) {
+    const element = document.getElementById(index);
+    element.parentNode.removeChild(element);
+  }
+    addTask = () =>{
+        const inputVal = document.querySelector("input").value;
+        const task = document.createElement("div");
+        task.setAttribute("id", ctr);
+       task.innerHTML = `<div>${inputVal}</div><button onclick="deleteTodo(${ctr})">Done</button>`;
+
+        document.querySelector("body").appendChild(task);
+        ctr = ctr + 1;
+        document.querySelector("input").value = "";
+    }
+</script>
+</html>
